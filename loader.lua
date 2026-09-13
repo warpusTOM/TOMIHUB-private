@@ -275,7 +275,7 @@ local function checkAccess(ui)
 end
 
 ------------------------------------------------------------------ run
-local ok, err = pcall(function()
+local function run()
     local route = ROUTES[tostring(game.PlaceId)]
 
     if not route then
@@ -300,11 +300,31 @@ local ok, err = pcall(function()
         error(("Failed to compile %s: %s"):format(route.name, tostring(compileError)))
     end
 
-    chunk()
-end)
+    -- Spawn the payload into its own task. The loader's host thread returns
+    -- immediately so the executor's per-script timeout applies to the
+    -- payload's task, not the loader. If the payload does not yield at all
+    -- internally (some Luraph builds), its task will still hit the timeout
+    -- and there is nothing we can do from outside it.
+    task.spawn(function()
+        warn("[TOMI HUB] running payload: " .. route.name)
+        local pok, perr = pcall(chunk)
+        if not pok then
+            warn("[TOMI HUB] payload error: " .. tostring(perr))
+        end
+    end)
+end
 
+local ok, err = pcall(run)
 env.__TomiHubLoading = nil
 
 if not ok then
     warn("[TOMI HUB] " .. tostring(err))
+end
+
+-- Keep this host thread alive forever so the spawned payload task is not
+-- reaped by an executor that tears down child tasks when its wrapper script
+-- would otherwise exit. task.wait yields to the scheduler, so this does not
+-- burn CPU and does not accumulate resumption time against the timeout.
+while true do
+    task.wait(1)
 end

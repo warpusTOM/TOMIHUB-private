@@ -22,7 +22,7 @@ return (function (...)
     local D = (loadstring(game:HttpGet(T.."Library.lua")))()
     local B
     pcall(function ()
-        B = (loadstring(game:HttpGet("https://upio-github-mirror.pages.dev/source.lua")))()
+--         B = (loadstring(game:HttpGet("https://upio-github-mirror.pages.dev/source.lua")))()   -- REMOVED: operator-controlled remote code
     end)
     if B then
         D:SetIconModule(B)

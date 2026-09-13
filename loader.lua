@@ -31,7 +31,12 @@ local ROUTES = {
     ["108890465381067"] = { name = "Trading World",  file = "TradingWorld.lua" },
     ["97598239454123"]  = { name = "Garden World 2", file = "void.lua" },
     ["77085202503540"]  = { name = "Garden World 2", file = "void.lua" },
-    ["107778070777162"] = { name = "Steal An Egg",   file = "TOMIHUB(StealAnEgg).lua" },
+
+    -- Steal An Egg is deliberately absent. The only build of it is a Luraph VM
+    -- that shows the original project's "moved to a new loader" panel instead of
+    -- running, so shipping it just hands users a redirect. Restore this line once
+    -- a TOMI HUB Steal An Egg script exists:
+    -- ["107778070777162"] = { name = "Steal An Egg", file = "TOMIHUB(StealAnEgg).lua" },
 }
 
 ------------------------------------------------------------------ guard

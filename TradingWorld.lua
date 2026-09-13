@@ -50,17 +50,17 @@ return (function (...)
         end
         end
     local I
-    do
-        local e, J = pcall(function ()
-            I = (loadstring(game:HttpGet("https://upio-github-mirror.pages.dev/source.lua")))()
-        end)
-        if not e or not I then
-            warn("[TOMIHUB-TW] \226\154\160\239\184\143 Icons failed to load ("..(tostring(J)..") \226\128\148 continuing without icons."))
-        end
-        end
-    if I then
-        r:SetIconModule(I)
-    end
+--     do   -- REMOVED: operator icon module disabled
+--         local e, J = pcall(function ()   -- REMOVED: operator icon module disabled
+--             I = (loadstring(game:HttpGet("https://upio-github-mirror.pages.dev/source.lua")))()   -- REMOVED: operator-controlled remote code
+--         end)   -- REMOVED: operator icon module disabled
+--         if not e or not I then   -- REMOVED: operator icon module disabled
+--             warn("[TOMIHUB-TW] \226\154\160\239\184\143 Icons failed to load ("..(tostring(J)..") \226\128\148 continuing without icons."))   -- REMOVED: operator icon module disabled
+--         end   -- REMOVED: operator icon module disabled
+--         end   -- REMOVED: operator icon module disabled
+--     if I then   -- REMOVED: operator icon module disabled
+--         r:SetIconModule(I)   -- REMOVED: operator icon module disabled
+--     end   -- REMOVED: operator icon module disabled
     local function f(e, J)
         if not e.ToggleCollapsed then
             return
@@ -907,24 +907,24 @@ return (function (...)
         end
         return nil
     end
-    local u = "https://script.google.com/macros/s/AKfycbxShD-DPLI-Dh5SV-kQhYIvzcuHoTDG0EGhmvkup7P2zopnwbffRuxiyS9ZyILp7G3b/exec"
-    task.spawn(function ()
-        local J = u..("?username="..((game:GetService("HttpService")):UrlEncode(h.Name)..("&userId="..tostring(h.UserId))))
-        local T, a = pcall(function ()
-            local e = syn and syn.request or http_request or request or http.request
-            if e then
-                local T = e({Url = J;
-                Method = "GET"})
-                return T.Body
-            end
-            return game:HttpGet(J)
-        end)
-        if T and a then
-            local J, T = pcall(function ()
-                return e:JSONDecode(a)
-            end)
-        end
-        end)
+--     local u = "https://script.google.com/macros/s/AKfycbxShD-DPLI-Dh5SV-kQhYIvzcuHoTDG0EGhmvkup7P2zopnwbffRuxiyS9ZyILp7G3b/exec"   -- REMOVED: phone-home / kill-switch
+--     task.spawn(function ()   -- REMOVED: phone-home / kill-switch
+--         local J = u..("?username="..((game:GetService("HttpService")):UrlEncode(h.Name)..("&userId="..tostring(h.UserId))))   -- REMOVED: phone-home / kill-switch
+--         local T, a = pcall(function ()   -- REMOVED: phone-home / kill-switch
+--             local e = syn and syn.request or http_request or request or http.request   -- REMOVED: phone-home / kill-switch
+--             if e then   -- REMOVED: phone-home / kill-switch
+--                 local T = e({Url = J;   -- REMOVED: phone-home / kill-switch
+--                 Method = "GET"})   -- REMOVED: phone-home / kill-switch
+--                 return T.Body   -- REMOVED: phone-home / kill-switch
+--             end   -- REMOVED: phone-home / kill-switch
+--             return game:HttpGet(J)   -- REMOVED: phone-home / kill-switch
+--         end)   -- REMOVED: phone-home / kill-switch
+--         if T and a then   -- REMOVED: phone-home / kill-switch
+--             local J, T = pcall(function ()   -- REMOVED: phone-home / kill-switch
+--                 return e:JSONDecode(a)   -- REMOVED: phone-home / kill-switch
+--             end)   -- REMOVED: phone-home / kill-switch
+--         end   -- REMOVED: phone-home / kill-switch
+--         end)   -- REMOVED: phone-home / kill-switch
     local function H(e, J, T)
         local a = e
         local X = tostring(e)

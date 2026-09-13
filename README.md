@@ -31,13 +31,15 @@ failing silently.
 ## Layout
 
 ```
-loader.lua                  auto-routing loader
+loader.lua                  auto-routing loader with access gate
+access.json                 who is allowed in - edit this to grant or revoke
 GardenWorld.lua             recovered, readable Luau
 TradingWorld.lua            recovered, readable Luau
 void.lua                    recovered, readable Luau
 TOMIHUB(StealAnEgg).lua     Luraph v14 VM build
 test.lua                    Luraph v14 VM build
 docs/
+  ACCESS.md                 how the access gate works
   DEOBFUSCATION.md          full recovery report
   luraph-opcode-map.md      recovered opcode table (199 opcodes)
   luraph-keystream.md       recovered key schedule
@@ -49,6 +51,22 @@ tools/
   luraph_keystream.py       reproduces the key schedule
 analysis/                   python toolchain used to recover the above
 ```
+
+---
+
+## Access
+
+The loader is gated. Nobody runs a script until they clear the check in
+`access.json`:
+
+- **owners** — UserIds that skip the key check. Put yourself here first.
+- **whitelist** — UserIds let in with no key.
+- **keys** — `"KEY": UserId`. The key only works for that one account.
+
+Edit `access.json` to grant or revoke. The loader never needs republishing, and
+revocation takes effect on the next load.
+
+Full details, including what this does *not* protect against: **[docs/ACCESS.md](docs/ACCESS.md)**.
 
 ---
 

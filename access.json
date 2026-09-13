@@ -1,0 +1,26 @@
+{
+  "_comment": "TOMI HUB access control. Edit this file to grant or revoke access - no need to touch loader.lua.",
+
+  "version": 1,
+
+  "notice": "TOMI HUB requires an access key.",
+
+  "getkey": "",
+
+  "owners": [],
+
+  "whitelist": [],
+
+  "keys": {
+    "TOMI-DEMO-0001": 0
+  },
+
+  "notes": [
+    "owners    : UserIds that skip the key check entirely. Put your own UserId here first.",
+    "whitelist : UserIds allowed in without a key.",
+    "keys      : key -> UserId. The key only works for that one account.",
+    "            Use 0 as the UserId to make a key work for anyone.",
+    "getkey    : optional URL shown to users who need a key. Empty hides the button.",
+    "Example:  \"TOMI-A1B2-C3D4\": 123456789"
+  ]
+}

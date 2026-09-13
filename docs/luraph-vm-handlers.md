@@ -1,0 +1,202 @@
+# Luraph VM — dispatch-table classification
+
+Source: `TOMIHUB(StealAnEgg).vm-beautified.lua`  ·  **147 handlers**
+
+Each entry is one opcode handler in the VM dispatch table `return({...})`.
+Feature columns are token counts inside that handler body.
+
+| # | handler | toks | arith | cmp | bit | index | call | ret | loop | assign | reader | class |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| 0 | `MC` | 104 | 0 | 4 | 0 | 2 | 2 | 1 | 2 | 6 |  | loop/control, compare/branch, returns-value, mutates-state |
+| 1 | `mC` | 166 | 4 | 3 | 0 | 10 | 2 | 1 | 2 | 11 |  | loop/control, compare/branch, arithmetic, table-index, returns-value, mutates-state |
+| 2 | `y` | 116 | 0 | 2 | 0 | 7 | 2 | 1 | 1 | 9 | yes | bytecode-reader, loop/control, compare/branch, table-index, returns-value, mutates-state |
+| 3 | `o` | 22 | 0 | 0 | 0 | 1 | 1 | 0 | 0 | 1 | yes | bytecode-reader |
+| 4 | `F4` | 62 | 0 | 0 | 0 | 4 | 2 | 1 | 0 | 4 |  | table-index, returns-value, mutates-state |
+| 5 | `O4` | 69 | 5 | 1 | 0 | 8 | 0 | 1 | 0 | 2 |  | arithmetic, table-index, returns-value |
+| 6 | `qC` | 184 | 2 | 1 | 0 | 0 | 3 | 2 | 1 | 4 |  | loop/control, call-heavy, returns-value, mutates-state |
+| 7 | `pC` | 21 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 |  | unclassified |
+| 8 | `l` | 183 | 4 | 3 | 0 | 14 | 1 | 1 | 1 | 10 |  | loop/control, compare/branch, arithmetic, table-index, returns-value, mutates-state |
+| 9 | `kC` | 21 | 0 | 0 | 0 | 1 | 1 | 1 | 0 | 1 |  | returns-value |
+| 10 | `Ao` | 268 | 7 | 5 | 0 | 9 | 5 | 4 | 1 | 13 |  | loop/control, compare/branch, arithmetic, table-index, call-heavy, returns-value, mutates-state |
+| 11 | `Ro` | 19 | 0 | 0 | 0 | 2 | 0 | 0 | 0 | 1 |  | unclassified |
+| 12 | `e4` | 42 | 0 | 0 | 0 | 2 | 2 | 1 | 0 | 2 |  | returns-value |
+| 13 | `zo` | 144 | 0 | 4 | 0 | 4 | 2 | 1 | 2 | 6 |  | loop/control, compare/branch, table-index, returns-value, mutates-state |
+| 14 | `po` | 12624 | 303 | 398 | 0 | 1077 | 190 | 12 | 50 | 713 |  | loop/control, compare/branch, arithmetic, table-index, call-heavy, returns-value, mutates-state |
+| 15 | `DC` | 14 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 |  | returns-value |
+| 16 | `j` | 81 | 4 | 1 | 0 | 7 | 1 | 1 | 0 | 2 |  | arithmetic, table-index, returns-value |
+| 17 | `T` | 21 | 0 | 0 | 0 | 1 | 0 | 1 | 0 | 1 |  | returns-value |
+| 18 | `L4` | 118 | 0 | 2 | 0 | 5 | 1 | 1 | 1 | 8 |  | loop/control, compare/branch, table-index, returns-value, mutates-state |
+| 19 | `n` | 415 | 13 | 7 | 0 | 30 | 10 | 3 | 0 | 14 |  | compare/branch, arithmetic, table-index, call-heavy, returns-value, mutates-state |
+| 20 | `T4` | 19 | 0 | 0 | 0 | 1 | 0 | 1 | 0 | 1 |  | returns-value |
+| 21 | `Z4` | 59 | 0 | 2 | 0 | 1 | 2 | 1 | 0 | 2 |  | compare/branch, returns-value |
+| 22 | `_4` | 129 | 5 | 0 | 0 | 10 | 7 | 1 | 0 | 3 |  | arithmetic, table-index, call-heavy, returns-value, mutates-state |
+| 23 | `N4` | 275 | 9 | 3 | 0 | 28 | 6 | 2 | 1 | 10 |  | loop/control, compare/branch, arithmetic, table-index, call-heavy, returns-value, mutates-state |
+| 24 | `w` | 136 | 8 | 1 | 0 | 13 | 3 | 1 | 0 | 3 |  | arithmetic, table-index, call-heavy, returns-value, mutates-state |
+| 25 | `u` | 95 | 2 | 2 | 0 | 10 | 2 | 1 | 0 | 2 |  | compare/branch, table-index, returns-value |
+| 26 | `v` | 73 | 2 | 0 | 0 | 4 | 3 | 1 | 0 | 2 |  | table-index, call-heavy, returns-value |
+| 27 | `W` | 21 | 0 | 0 | 0 | 1 | 0 | 1 | 0 | 1 |  | returns-value |
+| 28 | `y4` | 32 | 1 | 0 | 0 | 2 | 1 | 1 | 0 | 2 |  | returns-value |
+| 29 | `k4` | 95 | 0 | 2 | 0 | 4 | 1 | 1 | 1 | 6 |  | loop/control, compare/branch, table-index, returns-value, mutates-state |
+| 30 | `WC` | 129 | 0 | 2 | 0 | 1 | 2 | 1 | 1 | 7 |  | loop/control, compare/branch, returns-value, mutates-state |
+| 31 | `H` | 130 | 0 | 2 | 0 | 6 | 2 | 1 | 1 | 7 | yes | bytecode-reader, loop/control, compare/branch, table-index, returns-value, mutates-state |
+| 32 | `ZC` | 80 | 3 | 1 | 0 | 9 | 1 | 1 | 0 | 2 |  | arithmetic, table-index, returns-value |
+| 33 | `EC` | 520 | 2 | 24 | 0 | 13 | 13 | 2 | 4 | 27 |  | loop/control, compare/branch, table-index, call-heavy, returns-value, mutates-state |
+| 34 | `cC` | 77 | 2 | 2 | 0 | 0 | 2 | 3 | 3 | 1 |  | loop/control, compare/branch, returns-value |
+| 35 | `rC` | 130 | 0 | 0 | 0 | 3 | 3 | 2 | 0 | 5 |  | call-heavy, returns-value, mutates-state |
+| 36 | `VC` | 129 | 0 | 2 | 0 | 4 | 4 | 1 | 1 | 9 |  | loop/control, compare/branch, table-index, call-heavy, returns-value, mutates-state |
+| 37 | `i4` | 13 | 0 | 0 | 0 | 1 | 0 | 1 | 0 | 0 |  | returns-value |
+| 38 | `Uo` | 439 | 13 | 10 | 0 | 44 | 8 | 3 | 1 | 11 |  | loop/control, compare/branch, arithmetic, table-index, call-heavy, returns-value, mutates-state |
+| 39 | `S4` | 61 | 2 | 2 | 0 | 2 | 0 | 2 | 0 | 2 |  | compare/branch, returns-value |
+| 40 | `c` | 206 | 7 | 3 | 0 | 20 | 2 | 2 | 0 | 7 |  | compare/branch, arithmetic, table-index, returns-value, mutates-state |
+| 41 | `n4` | 104 | 1 | 1 | 0 | 3 | 3 | 2 | 2 | 4 |  | loop/control, call-heavy, returns-value, mutates-state |
+| 42 | `eC` | 26 | 0 | 0 | 0 | 3 | 0 | 0 | 0 | 1 |  | unclassified |
+| 43 | `J4` | 19 | 0 | 0 | 0 | 1 | 0 | 1 | 0 | 1 |  | returns-value |
+| 44 | `x4` | 307 | 17 | 0 | 0 | 17 | 6 | 1 | 2 | 21 |  | loop/control, arithmetic, table-index, call-heavy, returns-value, mutates-state |
+| 45 | `I4` | 87 | 1 | 1 | 0 | 3 | 3 | 2 | 0 | 4 |  | call-heavy, returns-value, mutates-state |
+| 46 | `A4` | 21 | 0 | 0 | 0 | 1 | 0 | 1 | 0 | 1 |  | returns-value |
+| 47 | `Lo` | 18 | 0 | 0 | 0 | 0 | 1 | 1 | 0 | 1 |  | returns-value |
+| 48 | `D4` | 53 | 2 | 2 | 0 | 2 | 1 | 2 | 0 | 1 |  | compare/branch, returns-value |
+| 49 | `wC` | 24 | 1 | 0 | 0 | 1 | 1 | 0 | 0 | 1 |  | unclassified |
+| 50 | `C` | 195 | 2 | 2 | 0 | 10 | 3 | 4 | 1 | 11 |  | loop/control, compare/branch, table-index, call-heavy, returns-value, mutates-state |
+| 51 | `q` | 68 | 2 | 1 | 0 | 6 | 2 | 1 | 0 | 2 |  | table-index, returns-value |
+| 52 | `X4` | 75 | 0 | 2 | 0 | 0 | 2 | 3 | 0 | 2 |  | compare/branch, returns-value |
+| 53 | `s4` | 19 | 0 | 0 | 0 | 1 | 0 | 1 | 0 | 1 |  | returns-value |
+| 54 | `BC` | 24 | 0 | 0 | 0 | 1 | 1 | 1 | 0 | 1 |  | returns-value |
+| 55 | `j4` | 38 | 0 | 0 | 0 | 3 | 1 | 1 | 0 | 2 |  | returns-value |
+| 56 | `W4` | 54 | 0 | 1 | 0 | 2 | 1 | 3 | 1 | 1 |  | loop/control, returns-value |
+| 57 | `d4` | 10 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 |  | returns-value |
+| 58 | `a4` | 19 | 0 | 0 | 0 | 1 | 0 | 1 | 0 | 0 |  | returns-value |
+| 59 | `v4` | 87 | 1 | 4 | 0 | 0 | 2 | 2 | 1 | 3 |  | loop/control, compare/branch, returns-value, mutates-state |
+| 60 | `IC` | 19 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 1 |  | returns-value |
+| 61 | `iC` | 14 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 1 |  | returns-value |
+| 62 | `Y4` | 95 | 0 | 3 | 0 | 5 | 2 | 1 | 1 | 4 |  | loop/control, compare/branch, table-index, returns-value, mutates-state |
+| 63 | `So` | 130 | 3 | 2 | 0 | 10 | 4 | 2 | 0 | 3 |  | compare/branch, arithmetic, table-index, call-heavy, returns-value, mutates-state |
+| 64 | `nC` | 111 | 7 | 0 | 0 | 10 | 5 | 1 | 0 | 3 |  | arithmetic, table-index, call-heavy, returns-value, mutates-state |
+| 65 | `U4` | 122 | 0 | 2 | 0 | 5 | 5 | 2 | 1 | 5 |  | loop/control, compare/branch, table-index, call-heavy, returns-value, mutates-state |
+| 66 | `yC` | 8 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 |  | returns-value |
+| 67 | `KC` | 19 | 0 | 0 | 0 | 2 | 0 | 0 | 0 | 1 |  | unclassified |
+| 68 | `w4` | 92 | 2 | 0 | 0 | 7 | 4 | 1 | 0 | 2 |  | table-index, call-heavy, returns-value |
+| 69 | `LC` | 580 | 14 | 11 | 0 | 33 | 13 | 7 | 2 | 31 |  | loop/control, compare/branch, arithmetic, table-index, call-heavy, returns-value, mutates-state |
+| 70 | `FC` | 82 | 1 | 4 | 0 | 3 | 4 | 1 | 0 | 3 |  | compare/branch, call-heavy, returns-value, mutates-state |
+| 71 | `s` | 34 | 0 | 0 | 0 | 1 | 0 | 1 | 0 | 3 |  | returns-value, mutates-state |
+| 72 | `tC` | 32 | 0 | 0 | 0 | 2 | 0 | 1 | 0 | 2 |  | returns-value |
+| 73 | `M4` | 26 | 1 | 0 | 0 | 2 | 1 | 1 | 0 | 1 |  | returns-value |
+| 74 | `zC` | 46 | 0 | 1 | 0 | 3 | 1 | 0 | 0 | 1 |  | unclassified |
+| 75 | `uC` | 25 | 1 | 0 | 0 | 2 | 0 | 0 | 0 | 1 |  | unclassified |
+| 76 | `l4` | 27 | 0 | 0 | 0 | 4 | 0 | 0 | 0 | 1 |  | table-index |
+| 77 | `QC` | 135 | 5 | 3 | 0 | 4 | 4 | 1 | 2 | 8 |  | loop/control, compare/branch, arithmetic, table-index, call-heavy, returns-value, mutates-state |
+| 78 | `xo` | 252 | 9 | 2 | 0 | 21 | 8 | 3 | 0 | 7 |  | compare/branch, arithmetic, table-index, call-heavy, returns-value, mutates-state |
+| 79 | `z4` | 19 | 1 | 0 | 0 | 2 | 0 | 0 | 0 | 1 |  | unclassified |
+| 80 | `_C` | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |  | unclassified |
+| 81 | `ko` | 36 | 2 | 1 | 0 | 2 | 0 | 1 | 0 | 2 |  | returns-value |
+| 82 | `R4` | 77 | 2 | 0 | 0 | 6 | 3 | 1 | 0 | 2 |  | table-index, call-heavy, returns-value |
+| 83 | `hC` | 33 | 1 | 0 | 0 | 1 | 1 | 1 | 0 | 2 |  | returns-value |
+| 84 | `Q4` | 28 | 1 | 0 | 0 | 0 | 1 | 2 | 1 | 0 |  | loop/control, returns-value |
+| 85 | `xC` | 33 | 0 | 1 | 0 | 4 | 1 | 0 | 0 | 2 |  | table-index |
+| 86 | `Jo` | 19 | 0 | 1 | 0 | 1 | 0 | 1 | 0 | 0 |  | returns-value |
+| 87 | `G4` | 77 | 4 | 2 | 0 | 10 | 0 | 1 | 0 | 2 |  | compare/branch, arithmetic, table-index, returns-value |
+| 88 | `o4` | 60 | 1 | 1 | 0 | 2 | 1 | 1 | 0 | 3 |  | returns-value, mutates-state |
+| 89 | `V4` | 105 | 8 | 0 | 0 | 11 | 4 | 1 | 0 | 3 |  | arithmetic, table-index, call-heavy, returns-value, mutates-state |
+| 90 | `H4` | 158 | 6 | 8 | 0 | 10 | 1 | 5 | 3 | 4 |  | loop/control, compare/branch, arithmetic, table-index, returns-value, mutates-state |
+| 91 | `_o` | 122 | 2 | 3 | 0 | 6 | 1 | 2 | 1 | 6 |  | loop/control, compare/branch, table-index, returns-value, mutates-state |
+| 92 | `x` | 2093 | 111 | 0 | 0 | 223 | 0 | 1 | 0 | 297 |  | arithmetic, table-index, returns-value, mutates-state |
+| 93 | `X` | 739 | 51 | 11 | 0 | 68 | 15 | 11 | 0 | 14 |  | compare/branch, arithmetic, table-index, call-heavy, returns-value, mutates-state |
+| 94 | `A` | 14 | 0 | 0 | 0 | 1 | 1 | 0 | 0 | 1 |  | unclassified |
+| 95 | `g4` | 50 | 1 | 1 | 0 | 0 | 1 | 2 | 1 | 2 |  | loop/control, returns-value |
+| 96 | `Y` | 159 | 8 | 1 | 0 | 13 | 4 | 1 | 0 | 5 |  | arithmetic, table-index, call-heavy, returns-value, mutates-state |
+| 97 | `c4` | 37 | 0 | 0 | 0 | 1 | 1 | 1 | 0 | 3 |  | returns-value, mutates-state |
+| 98 | `aC` | 27 | 0 | 0 | 0 | 1 | 0 | 1 | 0 | 2 |  | returns-value |
+| 99 | `vC` | 10 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 |  | returns-value |
+| 100 | `B4` | 526 | 11 | 17 | 0 | 36 | 11 | 4 | 2 | 22 |  | loop/control, compare/branch, arithmetic, table-index, call-heavy, returns-value, mutates-state |
+| 101 | `E` | 137 | 5 | 1 | 0 | 8 | 2 | 3 | 0 | 5 |  | arithmetic, table-index, returns-value, mutates-state |
+| 102 | `I` | 150 | 0 | 2 | 0 | 9 | 1 | 1 | 1 | 10 |  | loop/control, compare/branch, table-index, returns-value, mutates-state |
+| 103 | `f4` | 67 | 0 | 2 | 0 | 3 | 2 | 1 | 1 | 2 |  | loop/control, compare/branch, returns-value |
+| 104 | `OC` | 50 | 0 | 0 | 0 | 1 | 3 | 1 | 1 | 3 |  | loop/control, call-heavy, returns-value, mutates-state |
+| 105 | `bo` | 33 | 2 | 1 | 0 | 3 | 1 | 0 | 0 | 1 |  | unclassified |
+| 106 | `Z` | 161 | 6 | 0 | 0 | 12 | 7 | 1 | 0 | 5 |  | arithmetic, table-index, call-heavy, returns-value, mutates-state |
+| 107 | `gC` | 31 | 1 | 0 | 0 | 1 | 0 | 1 | 0 | 2 |  | returns-value |
+| 108 | `t4` | 22 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 2 |  | returns-value |
+| 109 | `g` | 128 | 0 | 2 | 0 | 7 | 3 | 1 | 1 | 7 |  | loop/control, compare/branch, table-index, call-heavy, returns-value, mutates-state |
+| 110 | `P4` | 239 | 4 | 6 | 0 | 14 | 5 | 2 | 1 | 12 |  | loop/control, compare/branch, arithmetic, table-index, call-heavy, returns-value, mutates-state |
+| 111 | `Ko` | 77 | 0 | 2 | 0 | 4 | 1 | 0 | 1 | 4 |  | loop/control, compare/branch, table-index, mutates-state |
+| 112 | `CC` | 1010 | 22 | 37 | 0 | 41 | 9 | 3 | 8 | 49 |  | loop/control, compare/branch, arithmetic, table-index, call-heavy, returns-value, mutates-state |
+| 113 | `h4` | 10 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 |  | returns-value |
+| 114 | `fC` | 34 | 0 | 0 | 0 | 2 | 1 | 1 | 0 | 2 |  | returns-value |
+| 115 | `lC` | 147 | 5 | 6 | 0 | 0 | 0 | 3 | 0 | 7 |  | compare/branch, arithmetic, returns-value, mutates-state |
+| 116 | `Fo` | 165 | 2 | 4 | 0 | 15 | 2 | 3 | 0 | 5 |  | compare/branch, table-index, returns-value, mutates-state |
+| 117 | `JC` | 81 | 0 | 2 | 0 | 2 | 3 | 1 | 1 | 5 |  | loop/control, compare/branch, call-heavy, returns-value, mutates-state |
+| 118 | `HC` | 112 | 2 | 4 | 0 | 2 | 1 | 4 | 0 | 3 |  | compare/branch, returns-value, mutates-state |
+| 119 | `YC` | 121 | 4 | 4 | 0 | 3 | 0 | 4 | 0 | 4 |  | compare/branch, arithmetic, returns-value, mutates-state |
+| 120 | `p4` | 38 | 0 | 0 | 0 | 3 | 1 | 0 | 0 | 3 |  | mutates-state |
+| 121 | `RC` | 570 | 2 | 21 | 0 | 23 | 11 | 7 | 6 | 23 |  | loop/control, compare/branch, table-index, call-heavy, returns-value, mutates-state |
+| 122 | `sC` | 87 | 0 | 1 | 0 | 3 | 3 | 1 | 1 | 7 |  | loop/control, call-heavy, returns-value, mutates-state |
+| 123 | `AC` | 64 | 0 | 2 | 0 | 7 | 0 | 1 | 1 | 2 |  | loop/control, compare/branch, table-index, returns-value |
+| 124 | `E4` | 24 | 0 | 0 | 0 | 1 | 1 | 1 | 0 | 1 |  | returns-value |
+| 125 | `K4` | 19 | 0 | 0 | 0 | 1 | 0 | 1 | 0 | 1 |  | returns-value |
+| 126 | `bC` | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |  | unclassified |
+| 127 | `jC` | 20 | 0 | 0 | 0 | 1 | 1 | 0 | 0 | 1 |  | unclassified |
+| 128 | `Mo` | 54 | 0 | 1 | 0 | 0 | 2 | 2 | 1 | 1 |  | loop/control, returns-value |
+| 129 | `GC` | 24 | 0 | 0 | 0 | 1 | 1 | 1 | 0 | 1 |  | returns-value |
+| 130 | `u4` | 14 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 1 |  | returns-value |
+| 131 | `m4` | 140 | 4 | 6 | 0 | 2 | 3 | 3 | 1 | 5 |  | loop/control, compare/branch, arithmetic, call-heavy, returns-value, mutates-state |
+| 132 | `PC` | 68 | 0 | 0 | 0 | 2 | 1 | 1 | 0 | 3 |  | returns-value, mutates-state |
+| 133 | `b4` | 481 | 14 | 8 | 0 | 41 | 12 | 5 | 1 | 17 |  | loop/control, compare/branch, arithmetic, table-index, call-heavy, returns-value, mutates-state |
+| 134 | `XC` | 138 | 2 | 5 | 0 | 9 | 1 | 0 | 2 | 5 |  | loop/control, compare/branch, table-index, mutates-state |
+| 135 | `UC` | 23 | 0 | 0 | 0 | 2 | 1 | 0 | 0 | 1 |  | unclassified |
+| 136 | `SC` | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |  | unclassified |
+| 137 | `r4` | 32 | 1 | 0 | 0 | 2 | 0 | 1 | 0 | 2 |  | returns-value |
+| 138 | `L` | 376 | 1 | 1 | 0 | 9 | 20 | 2 | 0 | 18 |  | table-index, call-heavy, returns-value, mutates-state |
+| 139 | `oC` | 134 | 3 | 4 | 0 | 8 | 0 | 3 | 1 | 5 |  | loop/control, compare/branch, arithmetic, table-index, returns-value, mutates-state |
+| 140 | `TC` | 24 | 0 | 0 | 0 | 1 | 1 | 1 | 0 | 1 |  | returns-value |
+| 141 | `r` | 93 | 0 | 3 | 0 | 0 | 2 | 3 | 0 | 2 |  | compare/branch, returns-value |
+| 142 | `t` | 21 | 0 | 0 | 0 | 1 | 0 | 1 | 0 | 1 |  | returns-value |
+| 143 | `C4` | 94 | 2 | 4 | 0 | 1 | 1 | 1 | 1 | 5 |  | loop/control, compare/branch, returns-value, mutates-state |
+| 144 | `q4` | 91 | 0 | 3 | 0 | 0 | 2 | 1 | 2 | 3 |  | loop/control, compare/branch, returns-value, mutates-state |
+| 145 | `dC` | 17 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 1 |  | returns-value |
+| 146 | `NC` | 602 | 13 | 18 | 0 | 39 | 11 | 4 | 9 | 29 |  | loop/control, compare/branch, arithmetic, table-index, call-heavy, returns-value, mutates-state |
+
+## Class histogram
+
+-  38  returns-value
+-  15  unclassified
+-  11  loop/control, compare/branch, arithmetic, table-index, call-heavy, returns-value, mutates-state
+-   6  loop/control, compare/branch, table-index, returns-value, mutates-state
+-   6  arithmetic, table-index, call-heavy, returns-value, mutates-state
+-   6  loop/control, compare/branch, table-index, call-heavy, returns-value, mutates-state
+-   5  loop/control, compare/branch, returns-value, mutates-state
+-   5  compare/branch, returns-value
+-   4  loop/control, compare/branch, arithmetic, table-index, returns-value, mutates-state
+-   4  loop/control, call-heavy, returns-value, mutates-state
+-   4  compare/branch, arithmetic, table-index, call-heavy, returns-value, mutates-state
+-   4  loop/control, returns-value
+-   4  returns-value, mutates-state
+-   3  arithmetic, table-index, returns-value
+-   3  table-index, call-heavy, returns-value
+-   2  bytecode-reader, loop/control, compare/branch, table-index, returns-value, mutates-state
+-   2  loop/control, compare/branch, returns-value
+-   2  call-heavy, returns-value, mutates-state
+-   2  table-index
+-   2  arithmetic, table-index, returns-value, mutates-state
+-   2  loop/control, compare/branch, table-index, mutates-state
+-   2  compare/branch, arithmetic, returns-value, mutates-state
+-   1  bytecode-reader
+-   1  table-index, returns-value, mutates-state
+-   1  compare/branch, table-index, returns-value
+-   1  compare/branch, arithmetic, table-index, returns-value, mutates-state
+-   1  loop/control, arithmetic, table-index, call-heavy, returns-value, mutates-state
+-   1  table-index, returns-value
+-   1  compare/branch, call-heavy, returns-value, mutates-state
+-   1  compare/branch, arithmetic, table-index, returns-value
+-   1  compare/branch, table-index, returns-value, mutates-state
+-   1  loop/control, compare/branch, call-heavy, returns-value, mutates-state
+-   1  compare/branch, returns-value, mutates-state
+-   1  mutates-state
+-   1  loop/control, compare/branch, table-index, returns-value
+-   1  loop/control, compare/branch, arithmetic, call-heavy, returns-value, mutates-state
+-   1  table-index, call-heavy, returns-value, mutates-state
+
+## Reader-bearing handlers (bytecode consumers)
+
+- `y` (#2) — 116 tokens, class: bytecode-reader, loop/control, compare/branch, table-index, returns-value, mutates-state
+- `o` (#3) — 22 tokens, class: bytecode-reader
+- `H` (#31) — 130 tokens, class: bytecode-reader, loop/control, compare/branch, table-index, returns-value, mutates-state

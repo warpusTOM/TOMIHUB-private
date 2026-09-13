@@ -21,15 +21,14 @@ it. Nothing else to configure.
 | `108890465381067` | Trading World | `TradingWorld.lua` |
 | `97598239454123` | Garden World 2 | `void.lua` |
 | `77085202503540` | Garden World 2 | `void.lua` |
+| `107778070777162` | Steal An Egg | `TOMIHUB(StealAnEgg).lua` |
 
 An unsupported PlaceId raises `Unsupported game. PlaceId: <id>` instead of
 failing silently.
 
-**No Steal An Egg route.** The only build of that game is a Luraph VM whose
-payload shows the original project's "moved to a new loader" panel instead of
-running, so shipping it would hand users a redirect to someone else's product.
-It is left in the repo as `TOMIHUB(StealAnEgg).lua` for reference only. A TOMI
-HUB version means writing one against the game from scratch.
+**Steal An Egg note.** The current public build of this game is a 180 KB stub
+that only shows a "moved to a new loader" panel. The copy here is the last full
+build — a 744 KB payload — recovered from the repository's own history.
 
 ---
 

@@ -32,11 +32,10 @@ local ROUTES = {
     ["97598239454123"]  = { name = "Garden World 2", file = "void.lua" },
     ["77085202503540"]  = { name = "Garden World 2", file = "void.lua" },
 
-    -- Steal An Egg is deliberately absent. The only build of it is a Luraph VM
-    -- that shows the original project's "moved to a new loader" panel instead of
-    -- running, so shipping it just hands users a redirect. Restore this line once
-    -- a TOMI HUB Steal An Egg script exists:
-    -- ["107778070777162"] = { name = "Steal An Egg", file = "TOMIHUB(StealAnEgg).lua" },
+    -- Steal An Egg: the current public file for this game is a 180 KB stub that
+    -- only shows a "moved to a new loader" panel. This is the last full build
+    -- from before that swap (744 KB payload), pulled from repo history.
+    ["107778070777162"] = { name = "Steal An Egg", file = "TOMIHUB(StealAnEgg).lua" },
 }
 
 ------------------------------------------------------------------ guard

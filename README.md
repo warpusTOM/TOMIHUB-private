@@ -26,9 +26,18 @@ it. Nothing else to configure.
 An unsupported PlaceId raises `Unsupported game. PlaceId: <id>` instead of
 failing silently.
 
-**Steal An Egg note.** The current public build of this game is a 180 KB stub
-that only shows a "moved to a new loader" panel. The copy here is the last full
-build — a 744 KB payload — recovered from the repository's own history.
+**Steal An Egg note — read this.** The current public build of this game is a
+180 KB stub that only shows a "moved to a new loader" panel. The copy here is
+the last full build — 744 KB, 689,702-char encrypted pool — recovered from the
+repository's own history.
+
+That means it is **not ours and not auditable**. It is Luraph v14.8: every
+string is encrypted, so nothing inside can be read, searched for URLs, or
+stripped of callbacks. The three readable payloads were cleaned of the original
+operator's remote-code fetch, Google Apps Script logger and Discord webhook
+(see `docs/SANITISED.md`); this one could not be. Treat it as untrusted — it
+may still contact endpoints we cannot see. The only way to make it clean is to
+write a TOMI HUB script for that game from scratch.
 
 ---
 
